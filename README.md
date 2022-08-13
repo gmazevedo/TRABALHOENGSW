@@ -1,1 +1,1 @@
-# TRABALHOENGSW
+# Implementação: Agora - Gerenciamento de Sessões 
