@@ -6,12 +6,10 @@
         <div class="row">
           <mat-card-title-group>
             <mat-card-title>
-              <h3 class="section-title">Cadastro de Vagas</h3>
+              <h3 class="section-title">Criação de Sessão</h3>
             </mat-card-title>
             <mat-card-subtitle class="row">
-              <p class="col">
-                Aqui é possível cadastrar novas vagas dentro do Sistema de Vagas
-              </p>
+              <p class="col">Aqui é possível criar uma nova sessão.</p>
             </mat-card-subtitle>
           </mat-card-title-group>
         </div>
@@ -19,49 +17,24 @@
           <div class="row">
             <div class="col-6">
               <mat-form-field class="full-width" appearance="fill">
-                <label class="control-label required">
-                  Nome da Vaga
-                </label>
-                <input matInput formControlName="name" />
+                <label class="control-label required"> Lider da sessão </label>
+                <input
+                  matInput
+                  placeholder="Insira o e-mail do(a) lider"
+                  formControlName="leader"
+                />
               </mat-form-field>
             </div>
             <div class="col-6">
               <mat-form-field class="full-width" appearance="fill">
-                <label class="control-label required">
-                  Tipo da Vaga
-                </label>
-                <input matInput formControlName="type" />
+                <label class="control-label required"> Participantes </label>
+                <input
+                  matInput
+                  placeholder="Insira os e-mails* dos participantes"
+                  formControlName="participants"
+                />
+                <mat-hint>*Os emails devem ser separados por vírgula.</mat-hint>
               </mat-form-field>
-            </div>
-            <div class="col-6">
-              <mat-form-field class="full-width" appearance="fill">
-                <label class="control-label required">
-                  Descrição da Vaga
-                </label>
-                <input matInput formControlName="description" />
-              </mat-form-field>
-            </div>
-            <div class="col-6">
-              <mat-form-field class="full-width" appearance="fill">
-                <label class="control-label">
-                  Remuneração
-                </label>
-                <input matInput type="number" formControlName="total_payment" />
-              </mat-form-field>
-            </div>
-          </div>
-          <div class="row">
-            <p> Áreas de Interesse <span class="required-ast"> *</span>
-            </p>
-          </div>
-          <div class="row">
-            <div class=" col-3" *ngFor="let areaControl of getAreaOptions().controls; let i = index"
-              formArrayName="areas">
-              <mat-checkbox class="checkbox" [formControlName]="i" color="primary">
-                <span class="checkbox-text">
-                  {{ areaOptions[i]}}
-                </span>
-              </mat-checkbox>
             </div>
           </div>
         </form>
@@ -74,8 +47,13 @@
           </button>
         </div>
         <div class="col-6 save-button-line">
-          <button mat-raised-button class="submit-button" [disabled]="!form.valid" [ngClass]="{disabled:!form.valid}"
-            (click)="saveForm()">
+          <button
+            mat-raised-button
+            class="submit-button"
+            [disabled]="!form.valid"
+            [ngClass]="{ disabled: !form.valid }"
+            (click)="saveForm()"
+          >
             Salvar
           </button>
         </div>
