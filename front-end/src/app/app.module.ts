@@ -4,13 +4,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { VacanciesInsertionComponent } from 'src/app/components/vacancies-insertion/vacancies-insertion.component';
-import { VacanciesComponent } from 'src/app/components/vacancies/vacancies.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input'
+import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -27,8 +26,7 @@ import { ProfileComponent } from './components/profile/profile.component';
     AppComponent,
     VacanciesInsertionComponent,
     LoginComponent,
-    VacanciesComponent,
-    ProfileComponent
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,9 +43,9 @@ import { ProfileComponent } from './components/profile/profile.component';
     MatSidenavModule,
     MatSelectModule,
     MatTableModule,
-    MatIconModule
+    MatIconModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

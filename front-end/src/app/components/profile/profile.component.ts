@@ -79,14 +79,11 @@ export class ProfileComponent implements OnInit {
 
     this.vacanciesService.getUpdateListener().subscribe({
       next: (res) => {
-        this.currentTeacherVacancies = this.authService.getCurrentUser()
-          .is_teacher
-          ? res.data.filter(
-              (vacancy) =>
-                vacancy.owner_registration_number ===
-                this.authService.getCurrentUser().registration_number
-            )
-          : [];
+        res.data.filter(
+          (vacancy) =>
+            vacancy.owner_registration_number ===
+            this.authService.getCurrentUser().registration_number
+        );
       },
     });
 
@@ -315,13 +312,6 @@ export class ProfileComponent implements OnInit {
 
   public getVacancyAreaOptions(): FormArray {
     return this.vacancyForm.get('areas') as FormArray;
-  }
-
-  public isTeacher() {
-    return (
-      this.authService.getCurrentUser() &&
-      this.authService.getCurrentUser().is_teacher
-    );
   }
 
   public openErrorDialog() {
