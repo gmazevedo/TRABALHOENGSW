@@ -20,11 +20,11 @@ export class AuthService {
 
   constructor(private router: Router, private http: HttpClient) {}
 
-  public async login(user_number: string, password: string) {
+  public async login(email: string, password: string) {
     const url = `${BACKEND_URL}/select_user_password`;
     const content: any = {
       parameters: {
-        user_number: user_number,
+        email: email,
       },
     };
 

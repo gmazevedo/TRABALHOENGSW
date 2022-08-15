@@ -34,11 +34,10 @@ export interface DialogData {
 export class LoginComponent implements OnInit {
   @ViewChild('errorDialog') errorDialog: TemplateRef<any>;
   public form: FormGroup = this.fb.group({
-    user_number: this.fb.control('', [
+    email: this.fb.control('', [
       Validators.required,
       Validators.pattern('^[a-z0-9]*$'),
-      Validators.maxLength(8),
-      Validators.minLength(4),
+      Validators.maxLength(30),
     ]),
     password: this.fb.control('', [Validators.required]),
   });
@@ -63,7 +62,7 @@ export class LoginComponent implements OnInit {
   public async onClick() {
     try {
       await this.authService.login(
-        this.form.get('user_number').value,
+        this.form.get('email').value,
         this.form.get('password').value
       );
     } catch (err) {

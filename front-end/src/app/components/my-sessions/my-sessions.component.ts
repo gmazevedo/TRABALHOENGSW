@@ -7,7 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-my-sessions',
   templateUrl: './my-sessions.component.html',
-  styleUrls: ['./my-sessions.component.css'],
+  styleUrls: ['./my-sessions.component.scss'],
 })
 export class MySessionsComponent implements OnInit {
   @ViewChild('errorDialog') errorDialog: TemplateRef<any>;

@@ -104,26 +104,17 @@ async function exportSessions(req, res) {
     }
 
     const rows = queryResult.rows;
-    const vacanciesMap = new Map();
+    const sessionsMap = new Map();
     rows.forEach((row) => {
-      if (vacanciesMap.has(row.vacancy_id)) {
-        if (row.area_name)
-          vacanciesMap.get(row.vacancy_id).areas.push(row.area_name);
-      } else {
-        vacanciesMap.set(row.vacancy_id, {
-          vacancy_id: row.vacancy_id,
-          owner_registration_number: row.owner_registration_number,
-          occupant_registration_number: row.occupant_registration_number,
-          name: row.name,
-          description: row.description,
-          type: row.type,
-          areas: row.area_name ? [row.area_name] : [],
-          total_payment: row.total_payment,
-        });
-      }
+      sessionsMap.set(row.session_id, {
+        session_id: row.session_id,
+        name: row.name,
+        leader: row.leader,
+        members: row.members,
+      });
     });
 
-    res.status(201).json({ result: Array.from(vacanciesMap.values()) });
+    res.status(201).json({ result: Array.from(sessionsMap.values()) });
   } catch (queryError) {
     console.log("Error while executing query in dataBase.");
     console.error(queryError);
@@ -152,21 +143,12 @@ async function exportsUsers(req, res) {
     const rows = queryResult.rows;
     const usersMap = new Map();
     rows.forEach((row) => {
-      if (usersMap.has(row.registration_number)) {
-        usersMap
-          .get(row.registration_number)
-          .area_interests.push(row.area_name);
-      } else {
-        usersMap.set(row.registration_number, {
-          registration_number: row.registration_number,
-          email: row.email,
-          password: row.password,
-          name: row.name,
-          cv_link: row.cv_link,
-          is_teacher: row.is_teacher,
-          area_interests: [row.area_name],
-        });
-      }
+      usersMap.set(row.user_id, {
+        user_id: row.user_id,
+        email: row.email,
+        password: row.password,
+        name: row.name,
+      });
     });
 
     res.status(201).json({ result: Array.from(usersMap.values()) });
@@ -189,15 +171,6 @@ async function insertData(req, res) {
     let query = insertParams.insertQuery(req.body.parameters);
 
     let queryResult = await authPool.query(query);
-
-    if (req.body.dataType === "INSERT_VACANCY") {
-      insertParams = INSERT_PARAMS["INSERT_VACANCY_AREAS"];
-      req.body.parameters.vacancy_id = queryResult.rows[0].vacancy_id;
-      query = insertParams.insertQuery(req.body.parameters);
-      if (req.body.areas.length > 0) {
-        queryResult = await authPool.query(query);
-      }
-    }
 
     res.status(201).json({ result: insertParams.printString });
   } catch (queryError) {
