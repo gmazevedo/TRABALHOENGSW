@@ -37,7 +37,7 @@ export class UsersService extends AbstractArrayFetcherService<User> {
       await lastValueFrom(this.http.post(url, content));
       this.fetch();
     } catch (err) {
-      console.error('Error in vacancies-service method: ', err);
+      console.error('Error in sessions-service method: ', err);
       throw err;
     }
   }
@@ -58,7 +58,7 @@ export class UsersService extends AbstractArrayFetcherService<User> {
       await lastValueFrom(this.http.post(url, content));
       this.fetch();
     } catch (err) {
-      console.error('Error in vacancies-service method: ', err);
+      console.error('Error in sessions-service method: ', err);
       throw err;
     }
   }
@@ -79,7 +79,7 @@ export class UsersService extends AbstractArrayFetcherService<User> {
       await lastValueFrom(this.http.post(url, content));
       this.fetch();
     } catch (err) {
-      console.error('Error in vacancies-service method: ', err);
+      console.error('Error in sessions-service method: ', err);
       throw err;
     }
   }

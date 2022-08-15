@@ -9,18 +9,8 @@ router.post(
 );
 router.post(
   "/select_sessions",
-  queryController.redirectSelectVacancies,
-  queryController.exportVacancies
-);
-router.post(
-  "/select_vacancies_interests",
-  queryController.redirectSelectVacancyInterest,
-  queryController.exportVacanciesInterest
-);
-router.post(
-  "/select_areas",
-  queryController.redirectSelectAreas,
-  queryController.exportData
+  queryController.redirectSelectSessions,
+  queryController.exportSessions
 );
 router.post(
   "/select_users",
@@ -29,19 +19,10 @@ router.post(
 );
 router.post(
   "/upsert_session",
-  queryController.redirectUpsertVacancy,
+  queryController.redirectUpsertSession,
   queryController.insertData
 );
-router.post(
-  "/insert_user_interests",
-  queryController.redirectInsertUserInterest,
-  queryController.insertData
-);
-router.post(
-  "/insert_vacancy_interest",
-  queryController.redirectInsertVacancyInterest,
-  queryController.insertData
-);
+
 router.post(
   "/update_user",
   queryController.redirectUpdateUser,
