@@ -6,10 +6,12 @@
         <div class="row">
           <mat-card-title-group>
             <mat-card-title>
-              <h3 class="section-title">Criação de Sessão</h3>
+              <h3 class="section-title">Crie sua sessão</h3>
             </mat-card-title>
             <mat-card-subtitle class="row">
-              <p class="col">Aqui é possível criar uma nova sessão.</p>
+              <p class="col">
+                E envie convites para que outros possam participar.
+              </p>
             </mat-card-subtitle>
           </mat-card-title-group>
         </div>
@@ -17,7 +19,7 @@
           <div class="row">
             <div class="col-6">
               <mat-form-field class="full-width" appearance="fill">
-                <label class="control-label required"> Lider da sessão </label>
+                <label class="control-label required"> Lider </label>
                 <input
                   matInput
                   placeholder="Insira o e-mail do(a) lider"
@@ -27,13 +29,23 @@
             </div>
             <div class="col-6">
               <mat-form-field class="full-width" appearance="fill">
+                <label class="control-label required"> Nome da sessão </label>
+                <input
+                  matInput
+                  placeholder="Insira o nome da sessão"
+                  formControlName="name"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-6">
+              <mat-form-field class="full-width" appearance="fill">
                 <label class="control-label required"> Participantes </label>
                 <input
                   matInput
-                  placeholder="Insira os e-mails* dos participantes"
+                  placeholder="Insira os e-mails dos participantes"
                   formControlName="participants"
                 />
-                <mat-hint>*Os emails devem ser separados por vírgula.</mat-hint>
+                <mat-hint>Os emails devem ser separados por vírgula.</mat-hint>
               </mat-form-field>
             </div>
           </div>
@@ -54,7 +66,7 @@
             [ngClass]="{ disabled: !form.valid }"
             (click)="saveForm()"
           >
-            Salvar
+            Criar
           </button>
         </div>
       </div>

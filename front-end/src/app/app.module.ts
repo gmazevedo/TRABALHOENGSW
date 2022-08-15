@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { VacanciesInsertionComponent } from 'src/app/components/vacancies-insertion/vacancies-insertion.component';
+import { SessionCreateComponent } from 'src/app/components/session-create/session-create.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -24,7 +24,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 @NgModule({
   declarations: [
     AppComponent,
-    VacanciesInsertionComponent,
+    SessionCreateComponent,
     LoginComponent,
     ProfileComponent,
   ],

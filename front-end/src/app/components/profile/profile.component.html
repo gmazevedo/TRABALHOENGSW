@@ -6,12 +6,10 @@
         <div class="row">
           <mat-card-title-group>
             <mat-card-title>
-              <h3 class="section-title">Perfil</h3>
+              <h3 class="section-title">Edite seu perfil</h3>
             </mat-card-title>
             <mat-card-subtitle class="row">
-              <p class="col">
-                Aqui é possível ver e editar seus dados pessoais.
-              </p>
+              <p class="col">Insira seus dados pessoais.</p>
             </mat-card-subtitle>
           </mat-card-title-group>
         </div>
@@ -68,12 +66,8 @@
   <span>Campo obrigatório</span>
 </ng-template>
 
-<ng-template #noVacancies>
-  <span>Você ainda não cadastrou nenhuma vaga</span>
-</ng-template>
-
 <ng-template #errorDialog>
-  <h2 matDialogTitle>Erro ao cadastrar</h2>
+  <h2 matDialogTitle>Erro ao criar</h2>
   <p matDialogContent>
     <em>Tente sair da aplicação e fazer login novamente</em>
   </p>
@@ -84,7 +78,7 @@
 
 <ng-template #successDialog>
   <h2 matDialogTitle>Sucesso</h2>
-  <p matDialogContent><em>Cadastro realizado com sucesso!</em></p>
+  <p matDialogContent><em>Sessão criada com sucesso!</em></p>
   <mat-dialog-actions align="end">
     <button mat-button matDialogClose>OK</button>
   </mat-dialog-actions>
