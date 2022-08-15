@@ -41,46 +41,4 @@ export class UsersService extends AbstractArrayFetcherService<User> {
       throw err;
     }
   }
-
-  public async saveInterests(
-    registration_number: string,
-    area_interests: string[]
-  ) {
-    const url = `${BACKEND_URL}/insert_user_interests`;
-    try {
-      const content: any = {
-        parameters: {
-          registration_number,
-          area_interests,
-        },
-      };
-
-      await lastValueFrom(this.http.post(url, content));
-      this.fetch();
-    } catch (err) {
-      console.error('Error in sessions-service method: ', err);
-      throw err;
-    }
-  }
-
-  public async deleteInterests(
-    registration_number: string,
-    area_interests: string[]
-  ) {
-    const url = `${BACKEND_URL}/delete_user_interests`;
-    try {
-      const content: any = {
-        parameters: {
-          registration_number,
-          area_interests,
-        },
-      };
-
-      await lastValueFrom(this.http.post(url, content));
-      this.fetch();
-    } catch (err) {
-      console.error('Error in sessions-service method: ', err);
-      throw err;
-    }
-  }
 }
