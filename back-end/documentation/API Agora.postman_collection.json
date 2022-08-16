@@ -1,0 +1,111 @@
+{
+  "info": {
+    "_postman_id": "c42503eb-be43-43ba-9972-cddff44ff032",
+    "name": "API Agora",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "User Password",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhcHJpeHByaWNpbmciLCJpYXQiOjE1OTI5MzE2NjMsImV4cCI6MTU5MjkzNTI2M30.nJQDXivI31z3NqH6ku9OJeHJUHXSulMKwUSqznm_Y1Q",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"parameters\" :{\n        \"email\":\"moises@gmail.com\"\n    }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/v1/select_user_password",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["v1", "select_user_password"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Select Sessions",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhcHJpeHByaWNpbmciLCJpYXQiOjE1OTI5MzE2NjMsImV4cCI6MTU5MjkzNTI2M30.nJQDXivI31z3NqH6ku9OJeHJUHXSulMKwUSqznm_Y1Q",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"parameters\" :{}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/v1/select_sessions",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["v1", "select_sessions"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Insert Session",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhcHJpeHByaWNpbmciLCJpYXQiOjE1OTI5MzE2NjMsImV4cCI6MTU5MjkzNTI2M30.nJQDXivI31z3NqH6ku9OJeHJUHXSulMKwUSqznm_Y1Q",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"parameters\" :{\n        \"name\": \"Sessao01\",\n        \"leader\": \"Moises Silva'\",\n        \"members\": \"Joana Oliveira \",\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/v1/insert_session",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["v1", "insert_session"]
+        }
+      },
+      "response": []
+    }
+  ]
+}
