@@ -14,15 +14,16 @@ const SELECT_SESSIONS = (params) => {
 
 const UPSERT_SESSION = (params) => {
   const name = params.name;
-  const leader = params.owner_registration_number;
+  const leader = params.leader;
   const members = params.members;
 
   let insertQuery = `
   INSERT INTO Sessions(name, leader, members)
   VALUES (%L)
   `;
+  console.log(format(insertQuery, [name, leader, members]));
 
-  return format(insertQuery, name, leader, members);
+  return format(insertQuery, [name, leader, members]);
 };
 
 const UPDATE_USER = (params) => {

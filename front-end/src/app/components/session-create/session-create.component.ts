@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -9,6 +9,7 @@ import {
 import { AuthService } from 'src/app/services/auth.service';
 import { SessionsService } from 'src/app/services/sessions.service';
 import { TsUtils } from 'src/app/util/TsUtils';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-session-create',
@@ -16,6 +17,8 @@ import { TsUtils } from 'src/app/util/TsUtils';
   styleUrls: ['./session-create.component.css'],
 })
 export class SessionCreateComponent implements OnInit {
+  @ViewChild('successDialog') successDialog: TemplateRef<any>;
+
   public form: FormGroup = this.fb.group({
     name: this.fb.control('', [Validators.required]),
     leader: this.fb.control('', [Validators.required]),
@@ -26,6 +29,7 @@ export class SessionCreateComponent implements OnInit {
   constructor(
     private sessionsService: SessionsService,
     private authService: AuthService,
+    private dialog: MatDialog,
     private fb: FormBuilder
   ) {}
 
@@ -38,13 +42,18 @@ export class SessionCreateComponent implements OnInit {
   public async saveForm() {
     try {
       await this.sessionsService.saveSession(
-        this.authService.getCurrentUser().registration_number,
+        this.form.get('name').value,
         this.form.get('leader').value,
         this.form.get('participants').value
       );
       this.resetForm();
+      this.openSucessDialog();
     } catch (err) {
       console.error('Error saving data: ', err);
     }
+  }
+
+  public openSucessDialog() {
+    this.dialog.open(this.successDialog);
   }
 }

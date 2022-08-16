@@ -99,6 +99,9 @@ export class ProfileComponent implements OnInit {
 
   public async saveSessionForm() {
     try {
+      console.log(this.sessionForm.get('name').value);
+      console.log(this.authService.getCurrentUser().registration_number);
+      console.log(this.sessionForm.get('members').value);
       await this.sessionsService.saveSession(
         this.sessionForm.get('name').value,
         this.authService.getCurrentUser().registration_number,
