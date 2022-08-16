@@ -14,7 +14,7 @@ const SELECT_SESSIONS = (params) => {
 
 const UPSERT_SESSION = (params) => {
   const name = params.name;
-  const leader = params.leader;
+  const leader = params.owner_registration_number;
   const members = params.members;
 
   let insertQuery = `
@@ -26,6 +26,7 @@ const UPSERT_SESSION = (params) => {
 };
 
 const UPDATE_USER = (params) => {
+  const registration_number = params.registration_number;
   const name = params.name;
   const password = params.password;
   const email = params.email;
@@ -38,10 +39,10 @@ const UPDATE_USER = (params) => {
   WHERE registration_number = %L
   `;
 
-  return format(updateQuery, name, password, email);
+  return format(updateQuery, name, password, email, registration_number);
 };
 
-const SELECT_USERS = (params) => {
+const SELECT_USERS = () => {
   let selectQuery = `SELECT * FROM users
   `;
 
@@ -49,14 +50,14 @@ const SELECT_USERS = (params) => {
 };
 
 const SELECT_USER_PASSWORD = (params) => {
-  const user_number = params.user_number;
+  const email = params.email;
 
-  let selectQuery = `SELECT *
-  FROM users 
+  let selectQuery = `SELECT password
+  FROM users u
     WHERE email = %L
   `;
 
-  return format(selectQuery, user_number);
+  return format(selectQuery, email);
 };
 
 module.exports = {

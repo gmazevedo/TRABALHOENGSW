@@ -27,15 +27,10 @@ export class ProfileComponent implements OnInit {
     name: this.fb.control('', [Validators.required]),
     password: this.fb.control('', [Validators.required]),
     email: this.fb.control('', [Validators.required]),
-    cv: this.fb.control(''),
-    areas: this.fb.array([]),
   });
-  public vacancyForm: FormGroup = this.fb.group({
+  public sessionForm: FormGroup = this.fb.group({
     name: this.fb.control('', [Validators.required]),
-    description: this.fb.control('', [Validators.required]),
-    type: this.fb.control('', [Validators.required]),
-    total_payment: this.fb.control(''),
-    areas: this.fb.array([]),
+    members: this.fb.control('', [Validators.required]),
   });
 
   constructor(
@@ -47,15 +42,15 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    /*this.sessionsService.getUpdateListener().subscribe({
+    this.sessionsService.getUpdateListener().subscribe({
       next: (res) => {
         res.data.filter(
           (session) =>
-            session.owner_registration_number ===
+            session.leader_number ===
             this.authService.getCurrentUser().registration_number
         );
       },
-    });*/
+    });
 
     this.userService.getUpdateListener().subscribe({
       next: (res) => {
@@ -98,16 +93,16 @@ export class ProfileComponent implements OnInit {
     }
   }
   public resetSessionForm() {
-    this.vacancyForm.get('leader').reset('');
-    this.vacancyForm.get('participants').reset('');
+    this.sessionForm.get('name').reset('');
+    this.sessionForm.get('members').reset('');
   }
 
   public async saveSessionForm() {
     try {
       await this.sessionsService.saveSession(
-        '7',
-        this.vacancyForm.get('leader').value,
-        this.vacancyForm.get('participants').value
+        this.sessionForm.get('name').value,
+        this.authService.getCurrentUser().registration_number,
+        this.sessionForm.get('members').value
       );
 
       this.resetSessionForm();
