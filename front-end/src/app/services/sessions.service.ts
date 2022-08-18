@@ -18,7 +18,7 @@ export class SessionsService extends AbstractArrayFetcherService<Session> {
   }
 
   public async saveSession(name: string, leader: string, members: string) {
-    const url = `${BACKEND_URL}/upsert_session`;
+    const url = `${BACKEND_URL}/insert_session`;
     try {
       const content: any = {
         parameters: {

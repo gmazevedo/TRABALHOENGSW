@@ -18,8 +18,8 @@ router.post(
   queryController.exportsUsers
 );
 router.post(
-  "/upsert_session",
-  queryController.redirectUpsertSession,
+  "/insert_session",
+  queryController.redirectInsertSession,
   queryController.insertData
 );
 

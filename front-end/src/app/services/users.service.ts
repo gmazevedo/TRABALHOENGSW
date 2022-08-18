@@ -17,20 +17,14 @@ export class UsersService extends AbstractArrayFetcherService<User> {
     super(http, BACKEND_URL + '/select_users');
   }
 
-  public async updateUser(
-    registration_number: string,
-    name: string,
-    password: string,
-    email: string
-  ) {
+  public async updateUser(name: string, email: string, password: string) {
     const url = `${BACKEND_URL}/update_user`;
     try {
       const content: any = {
         parameters: {
-          registration_number,
           name,
-          password,
           email,
+          password,
         },
       };
 

@@ -38,7 +38,10 @@ export class MySessionsComponent implements OnInit {
   public onInput() {
     this.sessionsToDisplay = this.sessionsFilter
       ? this.sessions.filter((session) => {
-          return session.name.includes(this.sessionsFilter);
+          return (
+            session.name.includes(this.sessionsFilter) ||
+            session.leader.includes(this.sessionsFilter)
+          );
         })
       : this.sessions;
   }

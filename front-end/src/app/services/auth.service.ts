@@ -8,7 +8,6 @@ const BACKEND_URL = 'http://localhost:5000/v1';
 export interface User {
   email: string;
   name: string;
-  registration_number: string;
 }
 
 @Injectable({
@@ -29,8 +28,7 @@ export class AuthService {
     };
 
     const res = await lastValueFrom(this.http.post(url, content));
-    if (res && password === 'Teste123') {
-      //res['result'][0].password
+    if (res && password === res['result'][0].password) {
       this.setLoggedIn(true);
       this.setCurrentUser(res['result'][0]);
       // redirects to default route

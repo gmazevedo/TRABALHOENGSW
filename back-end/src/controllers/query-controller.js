@@ -18,11 +18,15 @@ const SELECT_PARAMS = {
     selectQuery: dbQueries.SELECT_USERS,
     printString: "Usuários",
   },
+  SELECT_USERS_ID: {
+    selectQuery: dbQueries.SELECT_USERS,
+    printString: "Usuários",
+  },
 };
 
 const INSERT_PARAMS = {
-  UPSERT_SESSION: {
-    insertQuery: dbQueries.UPSERT_SESSION,
+  INSERT_SESSION: {
+    insertQuery: dbQueries.INSERT_SESSION,
     printString: "Sessão registrada com sucesso",
   },
   UPDATE_USER: {
@@ -44,8 +48,8 @@ function redirectSelectUserPassword(req, res, next) {
   next();
 }
 
-function redirectUpsertSession(req, res, next) {
-  req.body.dataType = "UPSERT_SESSION";
+function redirectInsertSession(req, res, next) {
+  req.body.dataType = "INSERT_SESSION";
   next();
 }
 
@@ -109,7 +113,7 @@ async function exportSessions(req, res) {
       sessionsMap.set(row.session_id, {
         session_id: row.session_id,
         name: row.name,
-        leader: row.leader,
+        leader: row.leader_name,
         members: row.members,
       });
     });
@@ -212,7 +216,7 @@ async function deleteData(req, res) {
 module.exports = {
   redirectSelectSessions,
   redirectSelectUserPassword,
-  redirectUpsertSession,
+  redirectInsertSession,
   redirectUpdateUser,
   redirectSelectUsers,
   exportData,

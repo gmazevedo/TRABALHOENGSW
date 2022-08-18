@@ -6,28 +6,32 @@ const APIUtil = require("./API-util");
 
 // Queries
 const SELECT_SESSIONS = (params) => {
-  let selectQuery = `SELECT * FROM Sessions
+  let selectQuery = `SELECT s.session_id, s.name, u.name as leader_name, s.members 
+  FROM Sessions s
+  LEFT JOIN Users u ON s.leader = u.user_id
+  ORDER BY s.name
+
     `;
 
   return selectQuery;
 };
 
-const UPSERT_SESSION = (params) => {
+const INSERT_SESSION = (params) => {
   const name = params.name;
   const leader = params.leader;
-  const members = params.members;
+  const members = params.members.split(",");
 
   let insertQuery = `
   INSERT INTO Sessions(name, leader, members)
-  VALUES (%L)
+  VALUES (%L, (SELECT user_id FROM Users WHERE email=%L), ARRAY((SELECT user_id FROM Users
+  WHERE email ~~ ANY(ARRAY[%L]) )) 
+  )
   `;
-  console.log(format(insertQuery, [name, leader, members]));
 
-  return format(insertQuery, [name, leader, members]);
+  return format(insertQuery, name, leader, members);
 };
 
 const UPDATE_USER = (params) => {
-  const registration_number = params.registration_number;
   const name = params.name;
   const password = params.password;
   const email = params.email;
@@ -36,11 +40,11 @@ const UPDATE_USER = (params) => {
   SET
     name = %L,
     password = %L,
-    email = %L,
-  WHERE registration_number = %L
+    email = %L
+  WHERE email = %L
   `;
 
-  return format(updateQuery, name, password, email, registration_number);
+  return format(updateQuery, name, password, email, email);
 };
 
 const SELECT_USERS = () => {
@@ -53,8 +57,8 @@ const SELECT_USERS = () => {
 const SELECT_USER_PASSWORD = (params) => {
   const email = params.email;
 
-  let selectQuery = `SELECT password
-  FROM users u
+  let selectQuery = `SELECT *
+  FROM users 
     WHERE email = %L
   `;
 
@@ -66,5 +70,5 @@ module.exports = {
   SELECT_USERS,
   SELECT_USER_PASSWORD,
   UPDATE_USER,
-  UPSERT_SESSION,
+  INSERT_SESSION,
 };

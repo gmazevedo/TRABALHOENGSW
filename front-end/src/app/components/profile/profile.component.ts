@@ -42,23 +42,11 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.sessionsService.getUpdateListener().subscribe({
-      next: (res) => {
-        res.data.filter(
-          (session) =>
-            session.leader_number ===
-            this.authService.getCurrentUser().registration_number
-        );
-      },
-    });
-
     this.userService.getUpdateListener().subscribe({
       next: (res) => {
         this.users = res.data;
         this.currentUser = res.data.filter(
-          (user) =>
-            user.registration_number ===
-            this.authService.getCurrentUser().registration_number
+          (user) => user.email === this.authService.getCurrentUser().email
         )[0];
 
         this.form.get('name').setValue(this.currentUser.name);
@@ -80,10 +68,9 @@ export class ProfileComponent implements OnInit {
   public async saveForm() {
     try {
       await this.userService.updateUser(
-        this.authService.getCurrentUser().registration_number,
         this.form.get('name').value,
-        this.form.get('password').value,
-        this.form.get('email').value
+        this.form.get('email').value,
+        this.form.get('password').value
       );
 
       this.openSucessDialog();
@@ -99,12 +86,9 @@ export class ProfileComponent implements OnInit {
 
   public async saveSessionForm() {
     try {
-      console.log(this.sessionForm.get('name').value);
-      console.log(this.authService.getCurrentUser().registration_number);
-      console.log(this.sessionForm.get('members').value);
       await this.sessionsService.saveSession(
         this.sessionForm.get('name').value,
-        this.authService.getCurrentUser().registration_number,
+        this.authService.getCurrentUser().email,
         this.sessionForm.get('members').value
       );
 
