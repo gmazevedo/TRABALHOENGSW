@@ -10,7 +10,9 @@
             </mat-card-title>
             <mat-card-subtitle class="row">
               <p class="col">
-                E envie convites para que outros possam participar.
+                E envie convites para que outros possam participar.<br />
+                Lembre-se: apenar usuários cadastrados podem participar ou ser
+                lider de sessões.
               </p>
             </mat-card-subtitle>
           </mat-card-title-group>
@@ -76,6 +78,16 @@
 
 <ng-template #required>
   <span>Campo obrigatório</span>
+</ng-template>
+
+<ng-template #errorDialog>
+  <h2 matDialogTitle>Erro ao criar sessão</h2>
+  <p matDialogContent>
+    <em>Verifique se os dados inseridos estão corretos.</em>
+  </p>
+  <mat-dialog-actions align="end">
+    <button mat-button matDialogClose>OK</button>
+  </mat-dialog-actions>
 </ng-template>
 
 <ng-template #successDialog>

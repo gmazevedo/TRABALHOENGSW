@@ -16,8 +16,8 @@ CREATE TABLE Sessions
 ( 
   session_id SERIAL PRIMARY KEY,
   name VARCHAR(30) NOT NULL,
-  leader VARCHAR(50) NOT NULL,
-  members VARCHAR(80) NOT NULL
+  leader INTEGER NOT NULL,
+  members VARCHAR(30) NOT NULL
 );
 
 -- Populando as tabelas
@@ -28,4 +28,4 @@ INSERT INTO Users (name,email,password,member_of,leader_of) VALUES ('Joana Olive
 
 
 -- Sessions
-INSERT INTO Sessions (name,leader,members) VALUES ('Sessao01','Moises Silva', 'Joana Oliveira');
+INSERT INTO Sessions (name,leader,members) VALUES ('Sessao01',1, 2);

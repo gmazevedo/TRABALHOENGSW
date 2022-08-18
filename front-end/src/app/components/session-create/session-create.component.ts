@@ -17,6 +17,7 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./session-create.component.css'],
 })
 export class SessionCreateComponent implements OnInit {
+  @ViewChild('errorDialog') errorDialog: TemplateRef<any>;
   @ViewChild('successDialog') successDialog: TemplateRef<any>;
 
   public form: FormGroup = this.fb.group({
@@ -49,8 +50,13 @@ export class SessionCreateComponent implements OnInit {
       this.resetForm();
       this.openSucessDialog();
     } catch (err) {
+      this.openErrorDialog();
       console.error('Error saving data: ', err);
     }
+  }
+
+  public openErrorDialog() {
+    this.dialog.open(this.errorDialog);
   }
 
   public openSucessDialog() {
