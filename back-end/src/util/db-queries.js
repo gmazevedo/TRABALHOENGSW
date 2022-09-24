@@ -31,6 +31,18 @@ const INSERT_SESSION = (params) => {
   return format(insertQuery, name, leader, members);
 };
 
+const INSERT_USER = (params) => {
+  const name = params.name;
+  const password = params.password;
+  const email = params.email;
+
+  let insertQuery = `INSERT INTO users(name,password,email) VALUES (%L)
+  ON CONFLICT (email) DO NOTHING
+  `;
+
+  return format(insertQuery, [name, password, email]);
+};
+
 const UPDATE_USER = (params) => {
   const name = params.name;
   const password = params.password;
@@ -71,4 +83,5 @@ module.exports = {
   SELECT_USER_PASSWORD,
   UPDATE_USER,
   INSERT_SESSION,
+  INSERT_USER,
 };

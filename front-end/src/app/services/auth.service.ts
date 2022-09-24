@@ -39,11 +39,6 @@ export class AuthService {
     }
   }
 
-  public logout() {
-    this.setLoggedIn(false);
-    this.router.navigate['login'];
-  }
-
   public isLoggedIn(): boolean {
     return this.loggedIn;
   }

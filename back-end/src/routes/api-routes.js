@@ -29,4 +29,9 @@ router.post(
   queryController.insertData
 );
 
+router.post(
+  "/insert_user",
+  queryController.redirectInsertUser,
+  queryController.insertData
+);
 module.exports = router;

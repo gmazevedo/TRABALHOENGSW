@@ -35,4 +35,23 @@ export class UsersService extends AbstractArrayFetcherService<User> {
       throw err;
     }
   }
+
+  public async insertUser(name: string, email: string, password: string) {
+    const url = `${BACKEND_URL}/insert_user`;
+    try {
+      const content: any = {
+        parameters: {
+          name,
+          email,
+          password,
+        },
+      };
+
+      await lastValueFrom(this.http.post(url, content));
+      this.fetch();
+    } catch (err) {
+      console.error('Error in sessions-service method: ', err);
+      throw err;
+    }
+  }
 }

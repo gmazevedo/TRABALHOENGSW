@@ -1,0 +1,85 @@
+<br class="top-spacing" />
+<section class="container-fluid form-section">
+  <div class="row">
+    <div class="col-12">
+      <mat-card class="main-cards">
+        <div class="row">
+          <mat-card-title-group>
+            <mat-card-title>
+              <h3 class="section-title">Preencha seu perfil</h3>
+            </mat-card-title>
+            <mat-card-subtitle class="row">
+              <p class="col">Insira seus dados pessoais.</p>
+            </mat-card-subtitle>
+          </mat-card-title-group>
+        </div>
+        <form [formGroup]="form">
+          <div class="row">
+            <div class="col-6">
+              <mat-form-field class="full-width" appearance="fill">
+                <label class="control-label required"> Nome </label>
+                <input matInput formControlName="name" />
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-6">
+              <mat-form-field class="full-width" appearance="fill">
+                <label class="control-label required"> Email </label>
+                <input matInput formControlName="email" />
+              </mat-form-field>
+            </div>
+            <div class="col-6">
+              <mat-form-field class="full-width" appearance="fill">
+                <label class="control-label required"> Senha </label>
+                <input matInput type="password" formControlName="password" />
+              </mat-form-field>
+            </div>
+          </div>
+        </form>
+      </mat-card>
+
+      <div class="row justify-content-end">
+        <div class="col-6 cancel-button-line">
+          <button mat-raised-button class="submit-button" (click)="resetForm()">
+            Limpar
+          </button>
+        </div>
+        <div class="col-6 save-button-line">
+          <button
+            mat-raised-button
+            class="submit-button"
+            [disabled]="!form.valid || form.pristine"
+            [ngClass]="{ disabled: !form.valid || form.pristine }"
+            (click)="saveForm()"
+          >
+            Criar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ng-template #required>
+  <span>Campo obrigatório</span>
+</ng-template>
+
+<ng-template #errorDialog>
+  <h2 matDialogTitle>Erro ao criar conta</h2>
+  <p matDialogContent>
+    <em>Tente novamente</em>
+  </p>
+  <mat-dialog-actions align="end">
+    <button mat-button matDialogClose>OK</button>
+  </mat-dialog-actions>
+</ng-template>
+
+<ng-template #successDialog>
+  <h2 matDialogTitle>Sucesso</h2>
+  <p matDialogContent><em>Conta criada com sucesso!</em></p>
+  <mat-dialog-actions align="end">
+    <button mat-button matDialogClose (click)="logout()">OK</button>
+  </mat-dialog-actions>
+</ng-template>

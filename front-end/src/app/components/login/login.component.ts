@@ -15,13 +15,7 @@ import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from '../../services/auth.service';
 
-import {
-  PRIMARY_OUTLET,
-  Router,
-  UrlSegment,
-  UrlSegmentGroup,
-} from '@angular/router';
-// import { AngularMaterialModule } from '../../core/angular-material.module';
+import { Router } from '@angular/router';
 
 export interface DialogData {
   animal: 'panda' | 'unicorn' | 'lion';
@@ -47,11 +41,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private dialog: MatDialog
-  ) {
-    const urlTree = this.router.parseUrl(this.router.url);
-    const segmentGroup: UrlSegmentGroup = urlTree.root.children[PRIMARY_OUTLET];
-    const urlSegments: UrlSegment[] = segmentGroup.segments;
-  }
+  ) {}
 
   public async ngOnInit() {
     if (this.authService.isLoggedIn()) {
@@ -68,6 +58,10 @@ export class LoginComponent implements OnInit {
     } catch (err) {
       this.openErrorDialog();
     }
+  }
+
+  public onSignup() {
+    this.router.navigate(['/signup']);
   }
 
   public openErrorDialog() {

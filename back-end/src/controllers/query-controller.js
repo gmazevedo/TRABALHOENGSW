@@ -33,6 +33,10 @@ const INSERT_PARAMS = {
     insertQuery: dbQueries.UPDATE_USER,
     printString: "Atualiza dados de um usuário existente",
   },
+  INSERT_USER: {
+    insertQuery: dbQueries.INSERT_USER,
+    printString: "Usuário registrado com sucesso",
+  },
 };
 
 const DELETE_PARAMS = {};
@@ -55,6 +59,11 @@ function redirectInsertSession(req, res, next) {
 
 function redirectUpdateUser(req, res, next) {
   req.body.dataType = "UPDATE_USER";
+  next();
+}
+
+function redirectInsertUser(req, res, next) {
+  req.body.dataType = "INSERT_USER";
   next();
 }
 
@@ -173,7 +182,6 @@ async function insertData(req, res) {
 
   try {
     let query = insertParams.insertQuery(req.body.parameters);
-
     let queryResult = await authPool.query(query);
 
     res.status(201).json({ result: insertParams.printString });
@@ -219,6 +227,7 @@ module.exports = {
   redirectInsertSession,
   redirectUpdateUser,
   redirectSelectUsers,
+  redirectInsertUser,
   exportData,
   exportSessions,
   exportsUsers,

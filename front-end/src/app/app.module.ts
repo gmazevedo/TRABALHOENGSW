@@ -21,6 +21,7 @@ import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { SessionCreateComponent } from 'src/app/components/session-create/session-create.component';
 import { MySessionsComponent } from 'src/app/components/my-sessions/my-sessions.component';
+import { SignupComponent } from './components/signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { MySessionsComponent } from 'src/app/components/my-sessions/my-sessions.
     LoginComponent,
     ProfileComponent,
     MySessionsComponent,
+    SignupComponent,
   ],
   imports: [
     BrowserModule,
