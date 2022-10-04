@@ -6,14 +6,16 @@ const APIUtil = require("./API-util");
 
 // Queries
 const SELECT_SESSIONS = (params) => {
-  let selectQuery = `SELECT s.session_id, s.name, u.name as leader_name, s.members 
+  let email = params;
+  let selectQuery = `SELECT s.session_id, s.name, u.name as leader, uc.name as members
   FROM Sessions s
-  LEFT JOIN Users u ON s.leader = u.user_id
-  ORDER BY s.name
-
+  LEFT JOIN Users u ON ARRAY[s.session_id]::text[] && u.leader_of 
+  LEFT JOIN Users uc ON ARRAY[s.session_id]::text[] && uc.member_of
+  WHERE u.email=%L OR uc.email=%L
+  ORDER BY session_id
     `;
 
-  return selectQuery;
+  return format(selectQuery, email, email);
 };
 
 const INSERT_SESSION = (params) => {
@@ -59,6 +61,19 @@ const UPDATE_USER = (params) => {
   return format(updateQuery, name, password, email, email);
 };
 
+const UPDATE_SESSION_MEMBERS = (params) => {
+  const id = params.session_id;
+  const members = params.members;
+
+  let updateQuery = `UPDATE sessions
+  SET
+    members = %L
+  WHERE session_id = %L
+  `;
+
+  return format(updateQuery, members, id);
+};
+
 const SELECT_USERS = () => {
   let selectQuery = `SELECT * FROM users
   `;
@@ -82,6 +97,7 @@ module.exports = {
   SELECT_USERS,
   SELECT_USER_PASSWORD,
   UPDATE_USER,
+  UPDATE_SESSION_MEMBERS,
   INSERT_SESSION,
   INSERT_USER,
 };

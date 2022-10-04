@@ -34,4 +34,10 @@ router.post(
   queryController.redirectInsertUser,
   queryController.insertData
 );
+
+router.post(
+  "/update_session_members",
+  queryController.redirectUpdateSessionMembers,
+  queryController.insertData
+);
 module.exports = router;

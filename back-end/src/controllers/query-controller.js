@@ -37,6 +37,10 @@ const INSERT_PARAMS = {
     insertQuery: dbQueries.INSERT_USER,
     printString: "Usuário registrado com sucesso",
   },
+  UPDATE_SESSION_MEMBERS: {
+    insertQuery: dbQueries.UPDATE_SESSION_MEMBERS,
+    printString: "Atualiza numero de membros de uma sessão",
+  },
 };
 
 const DELETE_PARAMS = {};
@@ -69,6 +73,11 @@ function redirectInsertUser(req, res, next) {
 
 function redirectSelectUsers(req, res, next) {
   req.body.dataType = "SELECT_USERS";
+  next();
+}
+
+function redirectUpdateSessionMembers(req, res, next) {
+  req.body.dataType = "UPDATE_SESSION_MEMBERS";
   next();
 }
 
@@ -122,7 +131,7 @@ async function exportSessions(req, res) {
       sessionsMap.set(row.session_id, {
         session_id: row.session_id,
         name: row.name,
-        leader: row.leader_name,
+        leader: row.leader,
         members: row.members,
       });
     });
@@ -228,6 +237,7 @@ module.exports = {
   redirectUpdateUser,
   redirectSelectUsers,
   redirectInsertUser,
+  redirectUpdateSessionMembers,
   exportData,
   exportSessions,
   exportsUsers,

@@ -14,7 +14,12 @@ export class MySessionsComponent implements OnInit {
   @ViewChild('successDialog') successDialog: TemplateRef<any>;
 
   public sessionsFilter = '';
-  public displayCols = ['Nº Participantes', 'Nome da sessão', 'Nome do lider'];
+  public displayCols = [
+    'Nº Participantes',
+    'Nome da sessão',
+    'Nome do lider',
+    'Ação',
+  ];
   public sessionsToDisplay: Session[] = [];
   private sessions: Session[] = [];
 
@@ -32,7 +37,7 @@ export class MySessionsComponent implements OnInit {
       },
     });
 
-    this.sessionsService.fetch();
+    this.sessionsService.fetch(this.authService.getCurrentUser().email);
   }
 
   public onInput() {
@@ -51,11 +56,20 @@ export class MySessionsComponent implements OnInit {
     return members.length ? members.length : 0;
   }
 
+  public async onClickExit() {
+    try {
+      //
+      //await this.sessionsService.updateSessionMembers(members);
+      this.openSuccessDialog();
+    } catch {
+      this.openErrorDialog();
+    }
+  }
   public openErrorDialog() {
     this.dialog.open(this.errorDialog);
   }
 
-  public openSucessDialog() {
+  public openSuccessDialog() {
     this.dialog.open(this.successDialog);
   }
 }

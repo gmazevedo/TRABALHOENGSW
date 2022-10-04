@@ -11,7 +11,6 @@ import { UsersService } from 'src/app/services/users.service';
 import { SessionsService } from 'src/app/services/sessions.service';
 import { User } from 'src/app/services/models/user.model';
 import { MatDialog } from '@angular/material/dialog';
-import { Session } from 'src/app/services/models/session.model';
 
 @Component({
   selector: 'app-profile',
@@ -55,7 +54,6 @@ export class ProfileComponent implements OnInit {
       },
     });
 
-    this.sessionsService.fetch();
     this.userService.fetch();
   }
 
