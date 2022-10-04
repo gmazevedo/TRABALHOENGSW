@@ -41,6 +41,14 @@ const INSERT_PARAMS = {
     insertQuery: dbQueries.UPDATE_SESSION_MEMBERS,
     printString: "Atualiza numero de membros de uma sessão",
   },
+  UPDATE_USER_MEMBERSHIP: {
+    insertQuery: dbQueries.UPDATE_USER_MEMBERSHIP,
+    printString: "Atualiza as sessões em que o usuário é membro",
+  },
+  UPDATE_USER_LEADERSHIP: {
+    insertQuery: dbQueries.UPDATE_USER_LEADERSHIP,
+    printString: "Atualiza as sessões em que o usuário é lider",
+  },
 };
 
 const DELETE_PARAMS = {};
@@ -78,6 +86,16 @@ function redirectSelectUsers(req, res, next) {
 
 function redirectUpdateSessionMembers(req, res, next) {
   req.body.dataType = "UPDATE_SESSION_MEMBERS";
+  next();
+}
+
+function redirectUpdateMembership(req, res, next) {
+  req.body.dataType = "UPDATE_USER_MEMBERSHIP";
+  next();
+}
+
+function redirectUpdateLeadership(req, res, next) {
+  req.body.dataType = "UPDATE_USER_LEADERSHIP";
   next();
 }
 
@@ -238,6 +256,8 @@ module.exports = {
   redirectSelectUsers,
   redirectInsertUser,
   redirectUpdateSessionMembers,
+  redirectUpdateMembership,
+  redirectUpdateLeadership,
   exportData,
   exportSessions,
   exportsUsers,

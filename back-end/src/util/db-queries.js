@@ -25,9 +25,8 @@ const INSERT_SESSION = (params) => {
 
   let insertQuery = `
   INSERT INTO Sessions(name, leader, members)
-  VALUES (%L, (SELECT user_id FROM Users WHERE email=%L), ARRAY((SELECT user_id FROM Users
-  WHERE email ~~ ANY(ARRAY[%L]) )) 
-  )
+  VALUES (%L, ARRAY(SELECT user_id FROM Users WHERE email=%L)::text[], ARRAY((SELECT user_id FROM Users
+  WHERE email ~~ ANY(ARRAY[%L])))::text[])
   `;
 
   return format(insertQuery, name, leader, members);
@@ -74,6 +73,31 @@ const UPDATE_SESSION_MEMBERS = (params) => {
   return format(updateQuery, members, id);
 };
 
+const UPDATE_USER_MEMBERSHIP = (params) => {
+  const email = params.email;
+  const session_name = params.session_name;
+
+  let updateQuery = `UPDATE users
+  SET
+    member_of = array_append(member_of,(SELECT session_id FROM sessions WHERE name = %L)::text)
+  WHERE email = %L
+  `;
+
+  return format(updateQuery, session_name, email);
+};
+
+const UPDATE_USER_LEADERSHIP = (params) => {
+  const email = params.email;
+  const session_name = params.session_name;
+
+  let updateQuery = `UPDATE users
+  SET
+    leader_of = array_append(leader_of,(SELECT session_id FROM sessions WHERE name = %L)::text)
+  WHERE email = %L
+  `;
+
+  return format(updateQuery, session_name, email);
+};
 const SELECT_USERS = () => {
   let selectQuery = `SELECT * FROM users
   `;
@@ -98,6 +122,8 @@ module.exports = {
   SELECT_USER_PASSWORD,
   UPDATE_USER,
   UPDATE_SESSION_MEMBERS,
+  UPDATE_USER_MEMBERSHIP,
+  UPDATE_USER_LEADERSHIP,
   INSERT_SESSION,
   INSERT_USER,
 };

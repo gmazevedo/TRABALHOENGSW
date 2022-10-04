@@ -40,4 +40,17 @@ router.post(
   queryController.redirectUpdateSessionMembers,
   queryController.insertData
 );
+
+router.post(
+  "/update_user_leadership",
+  queryController.redirectUpdateLeadership,
+  queryController.insertData
+);
+
+router.post(
+  "/update_user_membership",
+  queryController.redirectUpdateMembership,
+  queryController.insertData
+);
+
 module.exports = router;

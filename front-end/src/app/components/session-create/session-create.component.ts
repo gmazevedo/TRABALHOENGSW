@@ -8,8 +8,8 @@ import {
 } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { SessionsService } from 'src/app/services/sessions.service';
-import { TsUtils } from 'src/app/util/TsUtils';
 import { MatDialog } from '@angular/material/dialog';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-session-create',
@@ -29,6 +29,7 @@ export class SessionCreateComponent implements OnInit {
 
   constructor(
     private sessionsService: SessionsService,
+    private usersService: UsersService,
     private authService: AuthService,
     private dialog: MatDialog,
     private fb: FormBuilder
@@ -42,12 +43,26 @@ export class SessionCreateComponent implements OnInit {
 
   public async saveForm() {
     try {
-      await this.sessionsService.saveSession(
+      let session_id = await this.sessionsService.saveSession(
         this.form.get('name').value,
         this.form.get('leader').value,
         this.form.get('participants').value
       );
       this.resetForm();
+
+      if (
+        this.form.get('leader').value == this.authService.getCurrentUser().email
+      ) {
+        this.usersService.updateUserLeadership(
+          this.form.get('leader').value,
+          this.form.get('name').value
+        );
+      } else {
+        this.usersService.updateUserMembership(
+          this.form.get('participants').value,
+          this.form.get('name').value
+        );
+      }
       this.openSucessDialog();
     } catch (err) {
       this.openErrorDialog();
